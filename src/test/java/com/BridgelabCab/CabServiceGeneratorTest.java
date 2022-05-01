@@ -18,9 +18,7 @@ public class CabServiceGeneratorTest {
 
 	}
 
-	/**
-	 * test case total fare is less than minimum fare should return minimum fare
-	 */
+	
 	@Test
 	public void givenLessDistanceAndTime_ShouldReturnMiniumumFare() {
 		double distance = 0.1;
@@ -40,8 +38,21 @@ public class CabServiceGeneratorTest {
 				         new Ride(0.1,1),
 						};
 		double fare = cabServiceGenerator.calculateFare(rides);
-		System.out.println(fare);
 		Assert.assertEquals(30.0, fare);
+	}
+	
+	@Test
+	public void givenMultipleRides_ShouldreturnCountOfRidesAndAverageFarePerRide() {
+		CabServiceGenerator cabServiceGenerator = new CabServiceGenerator();
+		Ride[] rides = { new Ride(2.0,5),
+				         new Ride(0.1,1),
+						};
+		double fare = cabServiceGenerator.calculateFare(rides);
+		int count = cabServiceGenerator.count(rides);
+		double average = cabServiceGenerator.calculateAverage(fare, count);
+		System.out.println(average);
+		Assert.assertEquals(15.0, average);
+		
 	}
 	
 	
